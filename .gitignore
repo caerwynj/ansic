@@ -1,0 +1,8 @@
+*.o
+*.obj
+o.out
+*.exe
+NOTES
+.bashrc
+.viminfo
+MinGW/386/bin/*

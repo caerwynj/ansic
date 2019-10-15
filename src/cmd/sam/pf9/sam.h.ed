@@ -1,0 +1,8 @@
+408a
+
+#include <thread.h>
+#undef exits
+#define exits threadexitsall
+
+.
+0s/^sha1,63ff34b1c35dd788aa8c6aef883f5f1b399fcd9b/

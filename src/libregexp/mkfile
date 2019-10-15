@@ -1,0 +1,19 @@
+<../mkconfig
+<$ROOT/src/mkfiles/mkhost-$SYSHOST		# variables appropriate for host system
+<$ROOT/src/mkfiles/mkfile-$SYSTARG-$OBJTYPE	# variables used to build target object type
+
+LIB=libregexp.a
+
+OFILES=\
+	regcomp.$O\
+	regerror.$O\
+	regexec.$O\
+	regsub.$O\
+	regaux.$O\
+	rregexec.$O\
+	rregsub.$O\
+
+HFILES=	../../include/regexp.h\
+	regcomp.h\
+
+<$ROOT/src/mkfiles/mksyslib-$SHELLTYPE

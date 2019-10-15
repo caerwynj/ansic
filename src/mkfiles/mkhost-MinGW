@@ -1,0 +1,12 @@
+
+#	Variables for host system type = MinGW
+
+SHELLTYPE=	nt
+SHELLNAME=	rcsh
+HOSTMODEL=	Nt
+OSTARG=		os
+
+DATA2S=		data2s
+NDATE=		ndate
+KSIZE=		ksize
+AWK=		awk

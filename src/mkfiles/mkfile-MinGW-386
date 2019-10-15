@@ -1,0 +1,32 @@
+TARGMODEL=	Nt
+TARGSHTYPE=	rc
+CPUS=		386
+
+O=		o
+OS=		o
+
+AR=		ar
+ARFLAGS=	ruvs
+
+AS=		gcc -c -m32
+ASFLAGS=
+
+XXCC=		gcc -c -m32 -ansi\
+		-fsigned-char\
+		-fno-strict-aliasing\
+		-fno-aggressive-loop-optimizations\
+		-Wuninitialized -Wunused-variable -Wreturn-type -Wimplicit\
+		-I$ROOT/MinGW/386/include\
+		-I$ROOT/include
+
+CC=9c
+ANSICPP=
+LD=9l
+LDFLAGS=
+
+SYSLIBS=-L $ROOT/$SYSTARG/$OBJTYPE/lib -lbio -l9
+
+YACC=		iyacc
+YFLAGS=		-d
+BIN=$ROOT/$SYSTARG/$OBJTYPE/bin
+INSTALL=install

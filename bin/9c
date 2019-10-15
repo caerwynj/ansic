@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cc=gcc
+cflags="\
+	-c \
+	-m32 \
+	-Wall \
+	-Wno-parentheses \
+	-Wno-missing-braces \
+	-Wno-switch \
+	-Wno-comment \
+	-Wno-sign-compare \
+	-fno-omit-frame-pointer \
+	-fsigned-char \
+	-ansi \
+"
+
+
+$cc -I$ANSIC/MinGW/386/include -I$ANSIC/include $cflags  "$@"

@@ -1,0 +1,95 @@
+<../mkconfig
+
+TARG=\
+	ascii \
+	basename \
+	cal \
+	calendar \
+	cat \
+	cleanname \
+	cmp \
+	comm \
+	date \
+	dc \
+	dd \
+	deroff \
+	echo \
+	ed \
+	factor \
+	file \
+	fmt \
+	fortune \
+	freq \
+	fsize \
+	getflags \
+	hget \
+	hist \
+	idiff \
+	join \
+	look \
+	md5sum \
+	mtime \
+	ndate \
+	nm \
+	p \
+	pr \
+	primes \
+	read \
+	rm \
+	sed \
+	seq \
+	sha1sum \
+	sleep \
+	sort \
+	split \
+	strings \
+	sum \
+	tail \
+	tar \
+	tee \
+	test \
+	time \
+	touch \
+	tr \
+	unicode \
+	uniq \
+	unutf \
+	usage \
+	wc \
+	xd \
+	yacc \
+	zerotrunc \
+		
+
+<$ROOT/src/mkfiles/mkmany
+
+DIRS=awk
+
+<$ROOT/src/mkfiles/mkdirs
+
+dir-all dir-install: $PLAN9/bin/yacc $PLAN9/bin/lex
+
+bc.tab.c units.tab.c: $PLAN9/bin/yacc
+
+%.tab.h %.tab.c: %.y
+	$YACC $YFLAGS -s $stem $stem.y
+
+%.o: %.tab.c
+	9c -o $target $stem.tab.c
+
+delatex.c:D: delatex.lx $PLAN9/bin/lex
+	9 lex -t delatex.lx >delatex.c
+
+$PLAN9/bin/lex: $PLAN9/bin/yacc
+	cd lex; mk install
+
+# This should not be necessary.
+$PLAN9/bin/yacc: $O.yacc
+	install -c $O.yacc $PLAN9/bin/yacc
+$O.yacc: yacc.$O
+	$LD -o $target $prereq
+yacc.$O: yacc.c
+	$CC $CFLAGS yacc.c
+
+CLEANFILES=$CLEANFILES bc.tab.[ch] units.tab.[ch] delatex.c
+
