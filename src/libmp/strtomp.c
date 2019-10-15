@@ -1,6 +1,5 @@
 #include "os.h"
 #include <mp.h>
-#include <libsec.h>
 #include "dat.h"
 
 static struct {
@@ -32,13 +31,13 @@ init(void)
 	memset(tab.t10, INVAL, sizeof(tab.t10));
 
 	for(p = set64; *p; p++)
-		tab.t64[*p] = p-set64;
+		tab.t64[(uchar)*p] = p-set64;
 	for(p = set32; *p; p++)
-		tab.t32[*p] = p-set32;
+		tab.t32[(uchar)*p] = p-set32;
 	for(p = set16; *p; p++)
-		tab.t16[*p] = (p-set16)%16;
+		tab.t16[(uchar)*p] = (p-set16)%16;
 	for(p = set10; *p; p++)
-		tab.t10[*p] = (p-set10);
+		tab.t10[(uchar)*p] = (p-set10);
 
 	tab.inited = 1;
 }
@@ -85,7 +84,7 @@ from10(char *a, mpint *b)
 
 	b->top = 0;
 	for(;;){
-		// do a billion at a time in native arithmetic
+		/* do a billion at a time in native arithmetic */
 		x = 0;
 		for(i = 0; i < 9; i++){
 			y = tab.t10[*(uchar*)a];
@@ -98,7 +97,7 @@ from10(char *a, mpint *b)
 		if(i == 0)
 			break;
 
-		// accumulate into mpint
+		/* accumulate into mpint */
 		uitomp(mppow10[i], pow);
 		uitomp(x, r);
 		mpmul(b, pow, b);
@@ -192,7 +191,7 @@ strtomp(char *a, char **pp, int base, mpint *b)
 		break;
 	}
 
-	// if no characters parsed, there wasn't a number to convert
+	/* if no characters parsed, there wasn't a number to convert */
 	if(e == a)
 		return nil;
 

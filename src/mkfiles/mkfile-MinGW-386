@@ -11,7 +11,7 @@ ARFLAGS=	ruvs
 AS=		gcc -c -m32
 ASFLAGS=
 
-XXCC=		gcc -c -m32 -ansi\
+CC=		gcc -c -m32 -ansi\
 		-fsigned-char\
 		-fno-strict-aliasing\
 		-fno-aggressive-loop-optimizations\
@@ -19,7 +19,7 @@ XXCC=		gcc -c -m32 -ansi\
 		-I$ROOT/MinGW/386/include\
 		-I$ROOT/include
 
-CC=9c
+9CC=9c
 ANSICPP=
 LD=9l
 LDFLAGS=

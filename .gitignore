@@ -6,3 +6,5 @@ NOTES
 .bashrc
 .viminfo
 MinGW/386/bin/*
+*.a
+*.pdb

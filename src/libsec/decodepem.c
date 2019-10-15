@@ -6,7 +6,7 @@
 #define STRLEN(s)	(sizeof(s)-1)
 
 uchar*
-decodePEM(char *s, char *type, int *len, char **new_s)
+decodepem(char *s, char *type, int *len, char **news)
 {
 	uchar *d;
 	char *t, *e, *tt;
@@ -44,8 +44,8 @@ decodePEM(char *s, char *type, int *len, char **new_s)
 		return nil;
 	}
 
-	if(new_s)
-		*new_s = tt+1;
+	if(news)
+		*news = tt+1;
 	n = ((tt - t) * 6 + 7) / 8;
 	d = malloc(n);
 	if(d == nil){
@@ -72,7 +72,7 @@ decodepemchain(char *s, char *type)
 
 	e = strchr(s, '\0');
 	while (s < e) {
-		d = decodePEM(s, type, &n, &s);
+		d = decodepem(s, type, &n, &s);
 		if(d == nil)
 			break;
 		chp = malloc(sizeof(PEMChain));

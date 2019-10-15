@@ -15,7 +15,7 @@ main(void)
 	uchar *e;
 	vlong start;
 
-	fmtinstall('B', mpfmt);
+	fmtinstall('B', mpconv);
 
 	rsa = rsagen(1024, 16, 0);
 	if(rsa == nil)

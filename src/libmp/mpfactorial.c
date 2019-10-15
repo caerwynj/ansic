@@ -1,6 +1,5 @@
 #include "os.h"
 #include <mp.h>
-#include <libsec.h>
 #include "dat.h"
 
 mpint*
@@ -42,12 +41,8 @@ mpfactorial(ulong n)
 				max++;
 				if(max > mmax){
 					mmax++;
-					if(max >= nelem(stk)){
-						while(--max >= 0)
-							mpfree(stk[max]);
-						mpfree(r);
-						sysfatal("mpfactorial: stack overflow");
-					}
+					if(max > nelem(stk))
+						abort();
 					stk[max] = mpnew(Dbits);
 				}
 				stk[max]->top = 1;

@@ -18,7 +18,7 @@ CFILES = des.c desmodes.c desECB.c desCBC.c des3ECB.c des3CBC.c\
 OFILES=${CFILES:%.c=%.$O}
 
 HFILES=\
-	../include/libsec.h\
+	$ROOT/include/libsec.h\
 	../libmp/os.h\
 
 CFLAGS=$CFLAGS -I../libmp
@@ -27,4 +27,4 @@ UPDATE=mkfile\
 	$HFILES\
 	$CFILES\
 
-<../mksyslib
+<../mkfiles/mksyslib-$SHELLTYPE

@@ -50,7 +50,7 @@ enum
 	S41=	6,
 	S42=	10,
 	S43=	15,
-	S44=	21
+	S44=	21,
 };
 
 static u32int md5tab[] =

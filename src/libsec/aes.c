@@ -28,7 +28,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "os.h"
+#include <u.h>
+#include <libc.h>
 #include <libsec.h>
 
 typedef uchar	u8;
@@ -42,7 +43,9 @@ static const u32 Td3[256];
 static const u8  Te4[256];
 
 static int rijndaelKeySetupEnc(u32 rk[/*4*(Nr + 1)*/], const u8 cipherKey[], int keyBits);
+#ifdef NOTUSED
 static int rijndaelKeySetupDec(u32 rk[/*4*(Nr + 1)*/], const u8 cipherKey[], int keyBits);
+#endif
 static int rijndaelKeySetup(u32 erk[/*4*(Nr + 1)*/], u32 drk[/*4*(Nr + 1)*/], const u8 cipherKey[], int keyBits);
 static void	rijndaelEncrypt(const u32int rk[], int Nr, const uchar pt[16], uchar ct[16]);
 static void	rijndaelDecrypt(const u32int rk[], int Nr, const uchar ct[16], uchar pt[16]);
@@ -60,12 +63,12 @@ setupAESstate(AESstate *s, uchar key[], int keybytes, uchar *ivec)
 		memmove(s->ivec, ivec, AESbsize);
 	if(keybytes==16 || keybytes==24 || keybytes==32)
 		s->setup = 0xcafebabe;
-	// else rijndaelKeySetup was invalid
+	/* else rijndaelKeySetup was invalid */
 }
 
-// Define by analogy with desCBCencrypt;  AES modes are not standardized yet.
-// Because of the way that non-multiple-of-16 buffers are handled,
-// the decryptor must be fed buffers of the same size as the encryptor.
+/* Define by analogy with desCBCencrypt;  AES modes are not standardized yet. */
+/* Because of the way that non-multiple-of-16 buffers are handled, */
+/* the decryptor must be fed buffers of the same size as the encryptor. */
 void
 aesCBCencrypt(uchar *p, int len, AESstate *s)
 {
@@ -954,6 +957,7 @@ static int rijndaelKeySetupEnc(u32 rk[/*4*(Nr + 1)*/], const u8 cipherKey[], int
  *
  * @return	the number of rounds for the given cipher key size.
  */
+#ifdef NOTUSED
 static int rijndaelKeySetupDec(u32 rk[/*4*(Nr + 1)*/], const u8 cipherKey[], int keyBits) {
 	int Nr, i, j;
 	u32 temp;
@@ -993,6 +997,7 @@ static int rijndaelKeySetupDec(u32 rk[/*4*(Nr + 1)*/], const u8 cipherKey[], int
 	}
 	return Nr;
 }
+#endif
 
 static void rijndaelEncrypt(const u32 rk[/*4*(Nr + 1)*/], int Nr, const u8 pt[16], u8 ct[16]) {
 	u32 s0, s1, s2, s3, t0, t1, t2, t3;

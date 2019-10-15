@@ -36,8 +36,8 @@ FILES=\
 OFILES=${FILES:%=%.$O}
 
 HFILES=\
-	../$OBJDIR/include/lib9.h\
-	../include/mp.h\
+	$ROOT/include/lib9.h\
+	$ROOT/include/mp.h\
 	dat.h\
 
 CFILES=${FILES:%=%.c}
@@ -47,7 +47,7 @@ UPDATE=mkfile\
 	$HFILES\
 	$CFILES\
 
-<../mksyslib
+<../mkfiles/mksyslib-$SHELLTYPE
 
 # the remainder are only intended for testing on a few system types
 test.$O:	test.c $ROOT/$OBJDIR/include/lib9.h $ROOT/include/mp.h port/dat.h

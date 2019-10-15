@@ -28,7 +28,7 @@ IMPORTFILES=\
 	cistrncmp.$O\
 	cistrstr.$O\
 	cleanname.$O\
-	create.$O\
+#	create.$O\
 	dirwstat.$O\
 	dofmt.$O\
 	dorfmt.$O\
@@ -80,10 +80,10 @@ IMPORTFILES=\
 
 OFILES=$COMMONFILES $TARGFILES
 
-HFILES=$ROOT/$SYSTARG/$OBJTYPE/include/lib9.h\
+HFILES=$ROOT/include/lib9.h\
 	fmtdef.h\
 
-<$ROOT/mkfiles/mksyslib-$SHELLTYPE
+<$ROOT/src/mkfiles/mksyslib-$SHELLTYPE
 
 convD2M.$O: $ROOT/include/fcall.h
 convM2D.$O: $ROOT/include/fcall.h
