@@ -6,7 +6,7 @@ void	add(char*, ...);
 void	error(char*);
 void	notifyf(void*, char*);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i;

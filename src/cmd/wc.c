@@ -16,7 +16,7 @@ uvlong nbadr, tnbadr, pbadr;
 uvlong nchar, tnchar, pchar;
 void count(int, char *);
 void report(uvlong, uvlong, uvlong, uvlong, uvlong, char *);
-void
+int
 main(int argc, char *argv[])
 {
 	char *status="";

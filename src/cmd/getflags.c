@@ -36,7 +36,7 @@ countargs(char *p)
 	return n;
 }
 
-void
+int
 main(int argc, char *argv[])
 {
 	char *flags, *p, buf[512];

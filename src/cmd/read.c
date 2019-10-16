@@ -52,7 +52,7 @@ lines(int fd, char *file)
 	}while(multi || --nlines>0);
 }
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, fd;

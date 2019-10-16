@@ -1089,7 +1089,7 @@ extract(char **argv)
 	return nil;
 }
 
-void
+int
 main(int argc, char *argv[])
 {
 	int errflg = 0;

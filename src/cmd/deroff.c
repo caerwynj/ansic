@@ -142,7 +142,7 @@ fC1(void)
 	return c;
 }
 
-void
+int
 main(int argc, char *av[])
 {
 	int i;

@@ -1,6 +1,6 @@
 #include	<lib9.h>
 
-void
+int
 main(void)
 {
 	ulong t;

@@ -35,7 +35,7 @@ void	mark(double nn, long k);
 void	ouch(void);
 Biobuf bout;
 
-void
+int
 main(int argc, char *argp[])
 {
 	int i;

@@ -23,7 +23,7 @@ void	pline(char *buf);
 int	equal(char *b1, char *b2);
 char*	skip(char *s);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int f;

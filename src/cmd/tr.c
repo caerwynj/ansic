@@ -41,7 +41,7 @@ int	readrune(int, long*);
 void	wflush(int);
 void	writerune(int, Rune);
 
-void
+int
 main(int argc, char **argv)
 {
 	ARGBEGIN{

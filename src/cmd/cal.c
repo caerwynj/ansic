@@ -22,7 +22,7 @@ char	mon[] =
 char	string[432];
 Biobuf	bout;
 
-void	main(int argc, char *argv[]);
+int	main(int argc, char *argv[]);
 int	number(char *str);
 void	pstr(char *str, int n);
 void	cal(int m, int y, char *p, int w);
@@ -30,7 +30,7 @@ int	jan1(int yr);
 int	curmo(void);
 int	curyr(void);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int y, i, j, m;
@@ -89,7 +89,7 @@ xshort:
 	cal(m, y, string, 24);
 	for(i=0; i<6*24; i+=24)
 		pstr(string+i, 24);
-	exits(0);
+	return 0;
 
 /*
  *	print out complete year
@@ -115,10 +115,11 @@ xlong:
 			pstr(string+j, 72);
 	}
 	Bprint(&bout, "\n\n\n");
-	exits(0);
+	return 0;
 
 badarg:
 	Bprint(&bout, "cal: bad argument\n");
+	return 1;
 }
 
 struct
@@ -297,17 +298,21 @@ jan1(int yr)
 int
 curmo(void)
 {
-	Tm *tm;
+	struct tm *t;
+	time_t now;
 
-	tm = localtime(time(0));
-	return tm->mon+1;
+	now = time(0);
+	t = localtime(&now);
+	return t->tm_mon+1;
 }
 
 int
 curyr(void)
 {
-	Tm *tm;
+	struct tm *t;
+	time_t now;
 
-	tm = localtime(time(0));
-	return tm->year+1900;
+	now = time(0);
+	t = localtime(&now);
+	return t->tm_year+1900;
 }

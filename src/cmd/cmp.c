@@ -9,7 +9,7 @@ int Lflag = 0;
 
 static void usage(void);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int n, i;
@@ -102,6 +102,7 @@ main(int argc, char *argv[])
 	if(!sflag)
 		print("EOF on %s\n", (b1e - b1s > b2e - b2s)? name2 : name1);
 	exits("EOF");
+	return 1;
 }
 
 static void

@@ -33,7 +33,7 @@ sum(int fd, char *name)
 		print("%M\t%s\n", digest, name);
 }
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, fd;

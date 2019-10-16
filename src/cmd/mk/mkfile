@@ -28,14 +28,14 @@ OFILES=	arc.$O\
 	word.$O\
 
 HFILES=	fns.h\
-	../include/ar.h\
+	$ROOT/include/ar.h\
 	mk.h\
 
 LIBS=	regexp bio 9
 
 BIN=$ROOT/$OBJDIR/bin
 
-<$ROOT/mkfiles/mkone-$SHELLTYPE
+<$ROOT/src/mkfiles/mkone-$SHELLTYPE
 
 CFLAGS=$CFLAGS -I../include -DROOT'="'$ROOT'"'
 

@@ -7,7 +7,7 @@ char choice[2048];
 char *index = "#9/lib/fortunes.index";
 char *fortunes = "#9/lib/fortunes";
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i;

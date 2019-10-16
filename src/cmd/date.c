@@ -3,7 +3,7 @@
 
 int uflg, nflg;
 
-void
+int
 main(int argc, char *argv[])
 {
 	ulong now;

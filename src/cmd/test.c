@@ -35,7 +35,7 @@ int	tio(char *, int);
 int	e(void), e1(void), e2(void), e3(void);
 char	*nxtarg(int);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int r;

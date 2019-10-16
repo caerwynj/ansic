@@ -183,7 +183,7 @@ tpr(char *cp, Blk *bp)
 }
 /************/
 
-void
+int
 main(int argc, char *argv[])
 {
 	Binit(&bin, 0, OREAD);

@@ -127,7 +127,7 @@ Rune Lr[] = { 'r', 0 };
 
 char tmp[] = "/var/tmp/eXXXXX";
 
-void
+int
 main(int argc, char *argv[])
 {
 	char *p1, *p2;

@@ -73,7 +73,7 @@ void	torune(char*, Rune*);
 void	rcanon(Rune*, Rune*);
 int	ncomp(Rune*, Rune*);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int n;

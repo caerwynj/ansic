@@ -59,7 +59,7 @@ char *afmt[2][3] = {
 Biobuf	bin;
 Biobuf	bout;
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, err;

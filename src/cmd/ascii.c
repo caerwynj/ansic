@@ -59,7 +59,7 @@ int 	text=1;
 int	strip=0;
 Biobuf	bin;
 
-void
+int
 main(int argc, char **argv)
 {
 	int i;
@@ -107,7 +107,7 @@ main(int argc, char **argv)
 				putnum(*argv++);
 	}
 	Bputc(&bin, '\n');
-	exits(0);
+	return 0;
 }
 void
 usage(void)

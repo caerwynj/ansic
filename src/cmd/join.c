@@ -37,7 +37,7 @@ void seek1(void), seek2(void);
 Rune *strtorune(Rune *, char *);
 
 
-void
+int
 main(int argc, char **argv)
 {
 	int i;

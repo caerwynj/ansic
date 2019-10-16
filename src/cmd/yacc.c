@@ -375,7 +375,7 @@ void	aoutput(void);
 void	arout(char*, int*, int);
 int	gtnm(void);
 
-void
+int
 main(int argc, char *argv[])
 {
 	PARSER = unsharp(PARSER);

@@ -21,7 +21,7 @@ Date *dates(Date**, Tm*);
 void upper2lower(char*, char*, int);
 void *alloc(unsigned int);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, fd, ahead;
@@ -44,7 +44,7 @@ main(int argc, char *argv[])
 		break;
 	default:
 		fprint(2, "usage: calendar [-y] [-d] [files ...]\n");
-		exits("usage");
+		return 1;
 	}ARGEND;
 
 	/* make a list of dates */
@@ -81,7 +81,7 @@ main(int argc, char *argv[])
 		fd = open(buf, OREAD);
 		if(fd<0 || Binit(&in, fd, OREAD)<0){
 			fprint(2, "calendar: can't open %s: %r\n", buf);
-			exits("open");
+			return 1;
 		}
 
 		/* go through the file */
@@ -96,7 +96,7 @@ main(int argc, char *argv[])
 		}
 		close(fd);
 	}
-	exits("");
+	return 0;
 }
 
 char *months[] = 

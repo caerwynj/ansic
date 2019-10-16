@@ -11,7 +11,7 @@ int pglen = DEF;
 
 void printfile(int);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int n;

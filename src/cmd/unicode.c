@@ -13,7 +13,7 @@ char	*range(char*[]);
 char	*nums(char*[]);
 char	*chars(char*[]);
 
-void
+int
 main(int argc, char *argv[])
 {
 	ARGBEGIN{

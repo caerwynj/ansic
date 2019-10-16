@@ -47,7 +47,7 @@ extern	void	usage(void);
 
 #define JUMP(o,p) tseek(o,p), copy()
 
-void
+int
 main(int argc, char **argv)
 {
 	int seekable, c;

@@ -47,7 +47,7 @@ buildfmt(void)
 	format = fmt;
 }
 
-void
+int
 main(int argc, char *argv[]){
 	int j, n;
 	char buf[256], ffmt[4096];

@@ -12,7 +12,7 @@ usage(void)
 	exits("usage");
 }
 
-void
+int
 main(int argc, char **argv)
 {
 	int nocreate = 0;

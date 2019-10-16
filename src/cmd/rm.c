@@ -76,7 +76,7 @@ rmdir(char *f)
 	free(name);
 	free(dirbuf);
 }
-void
+int
 main(int argc, char *argv[])
 {
 	int i;

@@ -1,7 +1,7 @@
 #include <u.h>
 #include <libc.h>
 
-void
+int
 main(int argc, char **argv)
 {
 	char *dir;
@@ -21,7 +21,7 @@ main(int argc, char **argv)
 	if(argc < 1) {
 	Usage:
 		fprint(2, "usage: cleanname [-d pwd] name...\n");
-		exits("usage");
+		return 1;
 	}
 
 	for(i=0; i<argc; i++) {
@@ -32,7 +32,7 @@ main(int argc, char **argv)
 			name = malloc(strlen(argv[i])+1+strlen(dir)+1);
 			if(name == nil) {
 				fprint(2, "cleanname: out of memory\n");
-				exits("out of memory");
+				return 1;
 			}
 			sprint(name, "%s/%s", dir, argv[i]);
 			cleanname(name);
@@ -40,5 +40,5 @@ main(int argc, char **argv)
 			free(name);
 		}
 	}
-	exits(0);
+	return 0;
 }

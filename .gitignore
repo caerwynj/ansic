@@ -8,3 +8,5 @@ NOTES
 MinGW/386/bin/*
 *.a
 *.pdb
+o.*
+src/cmd/mk/ut

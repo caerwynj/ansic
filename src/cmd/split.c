@@ -19,7 +19,7 @@ extern char *fold(char*,int);
 extern void usage(void);
 extern void badexp(void);
 
-void
+int
 main(int argc, char *argv[])
 {
 	Reprog *exp;

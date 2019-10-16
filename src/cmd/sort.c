@@ -126,7 +126,7 @@ char*	tempfile(int);
 void	tempout(void);
 void	lineout(Biobuf*, Line*);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, f;

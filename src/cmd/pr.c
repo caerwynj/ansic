@@ -143,7 +143,7 @@ ffiler(char *s)
 	return smprint("can't open %s\n", s);
 }
 
-void
+int
 main(int argc, char *argv[])
 {
 	Fils fstr[NFILES];

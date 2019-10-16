@@ -199,7 +199,7 @@ int	ycomp(SedCom *);
 char *	trans(int c);
 void	putline(Biobuf *bp, Rune *buf, int n);
 
-void
+int
 main(int argc, char **argv)
 {
 	int compfl;

@@ -13,7 +13,7 @@ char in[8192];
 
 int	intignore(void*, char*);
 
-void
+int
 main(int argc, char **argv)
 {
 	int i;

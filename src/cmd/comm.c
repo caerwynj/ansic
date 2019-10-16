@@ -17,7 +17,7 @@ void	wr(char*, int);
 void	copy(Biobuf*, char*, int);
 int	compare(char*, char*);
 
-void
+int
 main(int argc, char *argv[])
 {
 	int l;

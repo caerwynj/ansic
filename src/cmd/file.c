@@ -196,7 +196,7 @@ int mime;
 #define OCTET	"application/octet-stream\n"
 #define PLAIN	"text/plain\n"
 
-void
+int
 main(int argc, char *argv[])
 {
 	int i, j, maxlen;

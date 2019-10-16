@@ -17,7 +17,7 @@ Biobuf	bin;
 
 void	factor(double);
 
-void
+int
 main(int argc, char *argv[])
 {
 	double n;

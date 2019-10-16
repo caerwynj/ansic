@@ -1,7 +1,7 @@
 #include <u.h>
 #include <libc.h>
 
-void
+int
 main(int argc, char *argv[])
 {
 	long secs;

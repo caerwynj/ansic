@@ -21,12 +21,12 @@ CC=		gcc -c -m32 -ansi\
 
 9CC=9c
 ANSICPP=
-LD=9l
-LDFLAGS=
+LD=gcc
+LDFLAGS=-L $ROOT/$SYSTARG/$OBJTYPE/lib -lbio -l9
 
-SYSLIBS=-L $ROOT/$SYSTARG/$OBJTYPE/lib -lbio -l9
+SYSLIBS=
 
 YACC=		iyacc
 YFLAGS=		-d
 BIN=$ROOT/$SYSTARG/$OBJTYPE/bin
-INSTALL=install
+INSTALL=cp
