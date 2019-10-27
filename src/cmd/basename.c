@@ -22,7 +22,7 @@ main(int argc, char *argv[])
 		if(pr){
 			*pr = 0;
 			print("%s\n", argv[1]);
-			exits(0);
+			exit(0);
 		}
 		print(".\n");
 		return 0;

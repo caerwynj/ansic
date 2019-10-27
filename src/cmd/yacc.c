@@ -324,7 +324,7 @@ struct
 
 	/* define functions */
 
-void	main(int, char**);
+int	main(int, char**);
 void	others(void);
 char*	chcopy(char*, char*);
 char*	writem(int*);

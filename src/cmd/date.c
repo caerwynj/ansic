@@ -11,7 +11,7 @@ main(int argc, char *argv[])
 	ARGBEGIN{
 	case 'n':	nflg = 1; break;
 	case 'u':	uflg = 1; break;
-	default:	fprint(2, "usage: date [-un] [seconds]\n"); exits("usage");
+	default:	fprint(2, "usage: date [-un] [seconds]\n"); exit(1);
 	}ARGEND
 
 	if(argc == 1)

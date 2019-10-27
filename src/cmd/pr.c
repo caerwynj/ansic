@@ -639,7 +639,7 @@ die(char *s)
 	errprint();
 	cerror(s);
 	Bputc(&bout, '\n');
-	exits("error");
+	exit(1);
 }
 
 /*
@@ -648,7 +648,7 @@ onintr(void)
 {
 	error++;
 	errprint();
-	exits("error");
+	exit(1);
 }
 /**/
 

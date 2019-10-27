@@ -352,12 +352,12 @@ fatal(char *s)
 
 	errstr(buf, sizeof buf);
 	fprint(2, "tail: %s: %s\n", s, buf);
-	exits(s);
+	exit(1);
 }
 
 void
 usage(void)
 {
 	fprint(2, "%s\n", umsg);
-	exits("usage");
+	exit(1);
 }

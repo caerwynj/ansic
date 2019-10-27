@@ -18,7 +18,7 @@ line(int fd, char *file)
 		n = read(fd, &c, 1);
 		if(n < 0){
 			fprint(2, "read: error reading %s: %r\n", file);
-			exits("read error");
+			exit(1);
 		}
 		if(n == 0){
 			if(m == 0)
@@ -30,7 +30,7 @@ line(int fd, char *file)
 			buf = realloc(buf, nalloc);
 			if(buf == nil){
 				fprint(2, "read: malloc error: %r\n");
-				exits("malloc");
+				exit(1);
 			}
 		}
 		buf[m++] = c;

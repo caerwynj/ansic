@@ -45,14 +45,14 @@ main(int argc, char *argp[])
 
 	if(argc <= 1) {
 		fprint(2, "usage: primes starting [ending]\n");
-		exits("usage");
+		exit(1);
 	}
 	nn = atof(argp[1]);
 	limit = big;
 	if(argc > 2) {
 		limit = atof(argp[2]);
 		if(limit < nn)
-			exits(0);
+			exit(0);
 		if(limit > big)
 			ouch();
 	}
@@ -66,10 +66,10 @@ main(int argc, char *argp[])
 			if(pt[i] < nn)
 				continue;
 			if(pt[i] > limit)
-				exits(0);
+				exit(0);
 			print("%d\n", pt[i]);
 			if(limit >= big)
-				exits(0);
+				exit(0);
 		}
 		nn = 230;
 	}
@@ -104,10 +104,10 @@ main(int argc, char *argp[])
 				continue;
 			temp = nn + i;
 			if(temp > limit)
-				exits(0);
+				exit(0);
 			Bprint(&bout, "%lld\n", (long long)temp);
 			if(limit >= big)
-				exits(0);
+				exit(0);
 		}
 		nn += tsiz8;
 	}
@@ -131,5 +131,5 @@ void
 ouch(void)
 {
 	fprint(2, "limits exceeded\n");
-	exits("limits");
+	exit(1);
 }

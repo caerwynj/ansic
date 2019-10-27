@@ -37,7 +37,7 @@ main(int argc, char *argv[])
 
 	if(argc > 3) {
 		fprint(2, "usage: cal [month] [year]\n");
-		exits("usage");
+		exit(1);
 	}
 	Binit(&bout, 1, OWRITE);
 

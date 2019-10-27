@@ -1263,7 +1263,7 @@ cpcom:
 			putline(&fout, linebuf, spend-linebuf);
 		if(aptr > abuf)
 			arout();
-		exits(0);
+		exit(0);
 	case RCOM:
 		*aptr++ = ipc;
 		if(aptr >= &abuf[MAXADDS])
@@ -1368,7 +1368,7 @@ arout(void)
 void
 errexit(void)
 {
-	exits("error");
+	exit(1);
 }
 
 void

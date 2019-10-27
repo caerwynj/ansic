@@ -150,7 +150,7 @@ openf(void)
 	fd = create(name,OWRITE,0666);
 	if(fd < 0) {
 		fprint(2, "grep: can't create %s: %r\n", name);
-		exits("create");
+		exit(1);
 	}
 	Binit(output, fd, OWRITE);
 }
@@ -178,12 +178,12 @@ void
 usage(void)
 {
 	fprint(2, "usage: split [-n num] [-e exp] [-f stem] [-s suff] [-x] [-i] [file]\n");
-	exits("usage");
+	exit(1);
 }
 
 void
 badexp(void)
 {
 	fprint(2, "split: bad regular expression\n");
-	exits("bad regular expression");
+	exit(1);
 }

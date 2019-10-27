@@ -51,24 +51,24 @@ main(int argc, char *argv[])
 		f = open(argv[1], 0);
 		if(f < 0) {
 			fprint(2, "cannot open %s\n", argv[1]);
-			exits("open");
+			exit(1);
 		}
 		break;
 	}
 	if(argc > 2) {
 		fprint(2, "unexpected argument %s\n", argv[2]);
-		exits("arg");
+		exit(1);
 	}
 	Binit(&fin, f, OREAD);
 	Binit(&fout, 1, OWRITE);
 
 	if(gline(b1))
-		exits(0);
+		exit(0);
 	for(;;) {
 		linec++;
 		if(gline(b2)) {
 			pline(b1);
-			exits(0);
+			exit(0);
 		}
 		if(!equal(b1, b2)) {
 			pline(b1);
@@ -77,7 +77,7 @@ main(int argc, char *argv[])
 				linec++;
 				if(gline(b1)) {
 					pline(b2);
-					exits(0);
+					exit(0);
 				}
 			} while(equal(b2, b1));
 			pline(b2);
@@ -96,7 +96,7 @@ gline(char *buf)
 		return 1;
 	if(fin.rdline >= bsize-1) {
 		fprint(2, "line too long\n");
-		exits("too long");
+		exit(1);
 	}
 	memmove(buf, p, fin.rdline);
 	buf[fin.rdline-1] = 0;

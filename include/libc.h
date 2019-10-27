@@ -176,6 +176,7 @@ extern	long	dirread(int, Dir**);
 extern	void	nulldir(Dir*);
 extern	long	dirreadall(int, Dir**);
 extern	char*	get9root(void);
+extern	char*	unsharp(char*);
 
 typedef
 struct Waitmsg

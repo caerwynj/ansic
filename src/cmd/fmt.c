@@ -28,7 +28,7 @@ void
 usage(void)
 {
 	fprint(2, "usage: %s [-j] [-i indent] [-l length] [file...]\n", argv0);
-	exits("usage");
+	exit(1);
 }
 
 int

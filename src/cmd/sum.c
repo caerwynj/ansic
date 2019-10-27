@@ -9,7 +9,7 @@ void
 usage(void)
 {
 	fprint(2, "Usage: %s [-r5] [files]\n", argv0);
-	exits("usage");
+	exit(1);
 }
 
 int

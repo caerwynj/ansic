@@ -12,7 +12,7 @@ _sysfatalimpl(char *fmt, va_list arg)
 		fprint(2, "%s: %s\n", argv0, buf);
 	else
 		fprint(2, "%s\n", buf);
-	exits(buf);
+	exit(1);
 }
 
 void (*_sysfatal)(char *fmt, va_list arg) = _sysfatalimpl;

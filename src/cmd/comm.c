@@ -52,7 +52,7 @@ main(int argc, char *argv[])
 	if(argc < 2) {
     Usage:
 		fprint(2, "usage: comm [-123] file1 file2\n");
-		exits("usage");
+		exit(1);
 	}
 
 	ib1 = openfil(argv[0]);
@@ -61,7 +61,7 @@ main(int argc, char *argv[])
 
 	if(rd(ib1,lb1) < 0){
 		if(rd(ib2,lb2) < 0)
-			exits(0);
+			exit(0);
 		copy(ib2,lb2,2);
 	}
 	if(rd(ib2,lb2) < 0)
@@ -73,7 +73,7 @@ main(int argc, char *argv[])
 			wr(lb1,3);
 			if(rd(ib1,lb1) < 0) {
 				if(rd(ib2,lb2) < 0)
-					exits(0);
+					exit(0);
 				copy(ib2,lb2,2);
 			}
 			if(rd(ib2,lb2) < 0)
@@ -141,7 +141,7 @@ copy(Biobuf *ibuf, char *lbuf, int n)
 	do
 		wr(lbuf,n);
 	while(rd(ibuf,lbuf) >= 0);
-	exits(0);
+	exit(0);
 }
 
 int
@@ -170,6 +170,6 @@ openfil(char *s)
 	if(b)
 		return b;
 	fprint(2,"comm: cannot open %s: %r\n",s);
-	exits("open");
+	exit(1);
 	return 0;	/* shut up ken */
 }

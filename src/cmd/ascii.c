@@ -113,7 +113,7 @@ void
 usage(void)
 {
 	fprint(2, "usage: %s [-8] [-xod | -b8] [-ncst] [--] [text]\n", argv0);
-	exits("usage");
+	exit(1);
 }
 void
 put(int i)
@@ -168,7 +168,7 @@ value(int c, int f)
 	if(f)
 		return(-1);
 	fprint(2, "%s: bad input char %c\n", argv0, c);
-	exits("bad");
+	exit(1);
 	return 0;	/* to keep ken happy */
 }
 int
