@@ -210,7 +210,7 @@ main(int argc, char **argv)
 	compfl = 0;
 
 	if(argc == 1)
-		exits(0);
+		return 0;
 	ARGBEGIN{
 	case 'e':
 		if (argc <= 1)
@@ -257,7 +257,7 @@ main(int argc, char **argv)
 		while(--argc >= 0)
 			enroll(*argv++);
 	execute();
-	exits(0);
+	return 0;
 }
 
 void
@@ -773,6 +773,7 @@ address(Addr *ap)
 	}
 }
 
+int
 cmp(char *a, char *b)		/* compare characters */
 {
 	while(*a == *b++)
@@ -782,6 +783,8 @@ cmp(char *a, char *b)		/* compare characters */
 			a++;
 	return 1;
 }
+
+int
 rcmp(Rune *a, Rune *b)		/* compare runes */
 {
 	while(*a == *b++)
@@ -1323,6 +1326,8 @@ putline(Biobuf *bp, Rune *buf, int n)
 		Bputrune(bp, *buf++);
 	Bputc(bp, '\n');
 }
+
+int
 ecmp(Rune *a, Rune *b, int count)
 {
 	while(count--)

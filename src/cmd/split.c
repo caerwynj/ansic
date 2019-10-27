@@ -65,7 +65,7 @@ main(int argc, char *argv[])
 		b = Bopen(argv[0], OREAD);
 		if(b == nil) {
 			fprint(2, "split: can't open %s: %r\n", argv[0]);
-			exits("open");
+			return 1;
 		}
 	} else
 		Binit(b, 0, OREAD);
@@ -105,7 +105,7 @@ main(int argc, char *argv[])
 	}
 	if(b != nil)
 		Bterm(b);
-	exits(0);
+	return 0;
 }
 
 int

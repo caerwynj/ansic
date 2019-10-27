@@ -101,7 +101,7 @@ extern	int	findopt(int, char**);
 extern	int	get(int);
 extern	void*	getspace(ulong);
 extern	int	intopt(char**, int*);
-extern	void	main(int, char**);
+extern	int	main(int, char**);
 extern	Biobuf*	mustopen(char*, Fils*);
 extern	void	nexbuf(void);
 extern	int	pr(char*);
@@ -119,12 +119,12 @@ getdate(void)
 {
 	static char *now = 0;
 	static Dir *sbuf;
-	ulong mtime;
+	time_t mtime;
 
 	if(Nfiles > 1 || Files->f_name == nulls) {
 		if(now == 0) {
 			mtime = time(0);
-			now = ctime(mtime);
+			now = ctime(&mtime);
 		}
 		return now;
 	}
@@ -134,7 +134,7 @@ getdate(void)
 		mtime = sbuf->mtime;
 		free(sbuf);
 	}
-	return ctime(mtime);
+	return ctime(&mtime);
 }
 
 char*
@@ -165,7 +165,7 @@ main(int argc, char *argv[])
 	if(!nfdone)			/* no files named, use stdin */
 		pr(nulls);		/* on GCOS, use current file, if any */
 	errprint();			/* print accumulated error reports */
-	exits(error? "error": 0);
+	return error;
 }
 
 int

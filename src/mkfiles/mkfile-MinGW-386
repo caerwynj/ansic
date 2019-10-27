@@ -22,7 +22,7 @@ CC=		gcc -c -m32 -ansi\
 9CC=9c
 ANSICPP=
 LD=gcc
-LDFLAGS=-L $ROOT/$SYSTARG/$OBJTYPE/lib -lbio -l9
+LDFLAGS=-L $ROOT/$SYSTARG/$OBJTYPE/lib -lbio -lregexp -l9
 
 SYSLIBS=
 

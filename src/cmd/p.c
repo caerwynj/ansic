@@ -19,7 +19,7 @@ main(int argc, char *argv[])
 
 	if((cons = Bopen("/dev/tty", OREAD)) == 0) {
 		fprint(2, "p: can't open /dev/tty\n");
-		exits("missing /dev/tty");
+		exit(1);
 	}
 	Binit(&bout, 1, OWRITE);
 	n = 0;
@@ -42,7 +42,7 @@ main(int argc, char *argv[])
 	}
 	if(n == 0)
 		printfile(0);
-	exits(0);
+	return 0;
 }
 
 void
@@ -76,14 +76,17 @@ printfile(int f)
 	    getcmd:
 		cmd = Brdline(cons, '\n');
 		if(cmd == 0 || *cmd == 'q')
-			exits(0);
+			exit(0);
 		cmd[Blinelen(cons)-1] = 0;
 		if(*cmd == '!'){
+/*
 			if(fork() == 0){
 				dup(Bfildes(cons), 0);
 				execl("/bin/rc", "rc", "-c", cmd+1, 0);
 			}
 			waitpid();
+*/
+			system(cmd+1);
 			goto getcmd;
 		}
 	}

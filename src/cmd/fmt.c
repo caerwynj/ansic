@@ -34,8 +34,8 @@ usage(void)
 int
 main(int argc, char **argv)
 {
-	int i, f;
-	char *s, *err;
+	int i, f, err;
+	char *s;
 
 	ARGBEGIN{
 	case 'i':
@@ -54,13 +54,13 @@ main(int argc, char **argv)
 
 	if(length <= indent){
 		fprint(2, "%s: line length<=indentation\n", argv0);
-		exits("length");
+		return 1;
 	}
 
 	s=getenv("tabstop");
 	if(s!=nil && atoi(s)>0)
 		maxtab=atoi(s);
-	err = nil;
+	err = 0;
 	Binit(&bout, 1, OWRITE);
 	if(argc <= 0){
 		Binit(&bin, 0, OREAD);
@@ -70,7 +70,7 @@ main(int argc, char **argv)
 			f = open(argv[i], OREAD);
 			if(f < 0){
 				fprint(2, "%s: can't open %s: %r\n", argv0, argv[i]);
-				err = "open";
+				err = 1;
 			}else{
 				Binit(&bin, f, OREAD);
 				fmt();
@@ -80,7 +80,7 @@ main(int argc, char **argv)
 			}
 		}
 	}
-	exits(err);
+	return err;
 }
 
 int

@@ -19,7 +19,7 @@ void report(uvlong, uvlong, uvlong, uvlong, uvlong, char *);
 int
 main(int argc, char *argv[])
 {
-	char *status="";
+	int status=0;
 	int i, f;
 	ARGBEGIN {
 	case 'l': pline++; break;
@@ -29,7 +29,7 @@ main(int argc, char *argv[])
 	case 'c': pchar++; break;
 	default:
 		fprint(2, "Usage: %s [-lwrbc] [file ...]\n", argv0);
-		exits("usage");
+		return 1;
 	} ARGEND
 	if(pline+pword+prune+pbadr+pchar == 0) {
 		pline = 1;
@@ -43,7 +43,7 @@ main(int argc, char *argv[])
 			f=open(argv[i], OREAD);
 			if(f<0){
 				perror(argv[i]);
-				status="can't open";
+				status=1;
 			}
 			else{
 				count(f, argv[i]);
@@ -58,7 +58,7 @@ main(int argc, char *argv[])
 		if(argc>1)
 			report(tnline, tnword, tnrune, tnbadr, tnchar, "total");
 	}
-	exits(status);
+	return status;
 }
 void
 report(uvlong nline, uvlong nword, uvlong nrune, uvlong nbadr, uvlong nchar, char *fname)

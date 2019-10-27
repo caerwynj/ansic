@@ -10,3 +10,5 @@ MinGW/386/bin/*
 *.pdb
 o.*
 src/cmd/mk/ut
+src/lib9/archive
+test

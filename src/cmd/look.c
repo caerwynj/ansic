@@ -105,7 +105,7 @@ main(int argc, char *argv[])
 	default:
 		fprint(2, "%s: bad option %c\n", argv0, ARGC());
 		fprint(2, "usage: %s -[dfinx] [-t c] [string] [file]\n", argv0);
-		exits("usage");
+		return 1;
 	} ARGEND
 	if(!iflag){
 		if(argc >= 1) {
@@ -125,16 +125,16 @@ main(int argc, char *argv[])
 	dfile = Bopen(filename, OREAD);
 	if(dfile == 0) {
 		fprint(2, "look: can't open %s\n", filename);
-		exits("no dictionary");
+		return 1;
 	}
 	if(!iflag)
 		if(!locate())
-			exits("not found");
+			return 1;
 	do {
 		if(iflag) {
 			Bflush(&bout);
 			if(!getword(&bin, orig, sizeof(orig)/sizeof(orig[0])))
-				exits(0);
+				return 0;
 			rcanon(orig, key);
 			if(!locate())
 				continue;
@@ -156,7 +156,7 @@ main(int argc, char *argv[])
 			break;
 		}
 	} while(iflag);
-	exits(0);
+	return 0;
 }
 
 int

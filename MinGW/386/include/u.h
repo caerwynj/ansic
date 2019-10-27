@@ -7,7 +7,11 @@
 #include <setjmp.h>
 #include <float.h>
 #include <time.h>
+#include <assert.h>
+#include <signal.h>
+#include <setjmp.h>
 
+#include <unistd.h>
 #include <process.h>
 #include <io.h>
 #include <direct.h>

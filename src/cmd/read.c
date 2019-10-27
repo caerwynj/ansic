@@ -71,7 +71,7 @@ main(int argc, char *argv[])
 		/* fall through */
 	default:
 		fprint(2, "usage: read [-m] [-n nlines] [files...]\n");
-		exits("usage");
+		return 1;
 	}ARGEND
 
 	if(argc == 0)
@@ -81,11 +81,11 @@ main(int argc, char *argv[])
 			fd = open(argv[i], OREAD);
 			if(fd < 0){
 				fprint(2, "read: can't open %s: %r\n", argv[i]);
-				exits("open");
+				return 1;
 			}
 			lines(fd, argv[i]);
 			close(fd);
 		}
 
-	exits(status);
+	return(status?1:0);
 }

@@ -125,14 +125,23 @@ void	substitute(int);
 Rune La[] = { 'a', 0 };
 Rune Lr[] = { 'r', 0 };
 
-char tmp[] = "/var/tmp/eXXXXX";
+char tmp[] = "/tmp/eXXXXX";
 
 int
 main(int argc, char *argv[])
 {
 	char *p1, *p2;
+	extern void onintr(int), onhup(int);
+	void (*oldintr)(int);
 
+/*
+	oldquit = signal(SIGQUIT, SIG_IGN);
+	oldhup = signal(SIGHUP, SIG_IGN);
+*/
+	oldintr = signal(SIGINT, SIG_IGN);
+/*
 	notify(notifyf);
+*/
 	ARGBEGIN {
 	case 'o':
 		oflag = 1;
@@ -162,10 +171,18 @@ main(int argc, char *argv[])
 	}
 	zero = malloc((nlall+5)*sizeof(int*));
 	tfname = mktemp(tmp);
+	print("tfname %s\n", tfname);
 	init();
+	if (((int)oldintr&01) == 0)
+		signal(SIGINT, onintr);
+/*
+	if (((int)oldhup&01) == 0)
+		signal(SIGHUP, onhup);
+*/
 	setjmp(savej);
 	commands();
 	quit();
+	return 0;
 }
 
 void
@@ -629,6 +646,35 @@ exfile(int om)
 }
 
 void
+onintr(int sig)
+{
+	USED(sig)
+	signal(SIGINT, onintr);
+	putchr('\n');
+	lastc = '\n';
+	error(Q);
+}
+
+void
+onhup(int sig)
+{
+	USED(sig)
+	signal(SIGINT, SIG_IGN);
+/*
+	signal(SIGHUP, SIG_IGN);
+*/
+	if (dol > zero) {
+		addr1 = zero+1;
+		addr2 = dol;
+		io = creat("ed.hup", 0666);
+		if (io > 0)
+			putfile();
+	}
+	fchange = 0;
+	quit();
+}
+
+void
 error1(char *s)
 {
 	int c;
@@ -681,6 +727,7 @@ rescue(void)
 	quit();
 }
 
+/*
 void
 notifyf(void *a, char *s)
 {
@@ -702,6 +749,7 @@ notifyf(void *a, char *s)
 	fprint(2, "ed: note: %s\n", s);
 	abort();
 }
+*/
 
 int
 getchr(void)
@@ -931,15 +979,18 @@ callunix(void)
 			p += runetochar(p, &rune);
 		}
 	*p = 0;
+/*
 	pid = fork();
 	if(pid == 0) {
 		execlp("rc", "rc", "-c", buf, (char*)0);
 		sysfatal("exec failed: %r");
-		exits("execl failed");
+		exit(1);
 	}
 	waiting = 1;
 	while(waitpid() != pid)
 		;
+*/
+	system(buf);
 	waiting = 0;
 	if(vflag)
 		putst("!");
@@ -953,7 +1004,7 @@ quit(void)
 		error(Q);
 	}
 	remove(tfname);
-	exits(0);
+	exit(0);
 }
 
 void
@@ -1119,7 +1170,7 @@ init(void)
 	ichanged = 0;
 	if((tfile = create(tfname, ORDWR, 0600)) < 0){
 		error1(T);
-		exits(0);
+		exit(0);
 	}
 	dot = dol = zero;
 }

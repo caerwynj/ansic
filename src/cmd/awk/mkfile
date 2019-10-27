@@ -7,7 +7,7 @@ OFILES=\
 	lex.$O\
 	lib.$O\
 	main.$O\
-	missing95.$O\
+#	missing95.$O\
 	parse.$O\
 	proctab.$O\
 	run.$O\
@@ -21,9 +21,10 @@ HFILES=\
 
 LIBS=bio			# order is important
 
-CFLAGS=$CFLAGS -QIfdiv-
-LDFLAGS=$LDFLAGS setargv.obj
+CFLAGS=
+LDFLAGS=$LDFLAGS
 
 BIN=$ROOT/$OBJDIR/bin
 
-<$ROOT/mkfiles/mkone-$SHELLTYPE
+<$ROOT/src/mkfiles/mkone-$SHELLTYPE
+<mkfile-$HOSTMODEL

@@ -29,7 +29,7 @@ main(int argc, char *argv[])
 			n = atof(argv[i]);
 			factor(n);
 		}
-		exits(0);
+		return 0;
 	}
 
 	Binit(&bin, 0, OREAD);
@@ -42,7 +42,7 @@ main(int argc, char *argv[])
 			break;
 		factor(n);
 	}
-	exits(0);
+	return 0;
 }
 
 void

@@ -119,7 +119,7 @@ main(int argc, char **argv)
 			trunc(sb0, &sb1);
 			sleep(5000);
 		}
-	exits(0);
+	return 0;
 }
 
 void

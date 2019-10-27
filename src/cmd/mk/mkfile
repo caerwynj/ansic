@@ -38,5 +38,3 @@ BIN=$ROOT/$OBJDIR/bin
 <$ROOT/src/mkfiles/mkone-$SHELLTYPE
 
 CFLAGS=$CFLAGS -I../include -DROOT'="'$ROOT'"'
-
-<mkfile-$HOSTMODEL

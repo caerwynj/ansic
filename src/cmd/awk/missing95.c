@@ -3,13 +3,15 @@
    if this won't load, use the return NULL statements. */
 
 #include <stdio.h>
+/*
 FILE *popen(char *s, char *m) {
-	return _popen(s, m);	/* return NULL; */
+	return _popen(s, m);
 }
 
 int pclose(FILE *f) {
-	return _pclose(f);	/* return NULL; */
+	return _pclose(f);
 }
+*/
 
 #include <windows.h>
 #include <winbase.h>
@@ -26,19 +28,19 @@ int system(char *s) {
 
 	memset(&si, 0, sizeof(si));
 	si.cb = sizeof(si);
-//	si.dwFlags = STARTF_USESHOWWINDOW;
-//	si.wShowWindow = SW_SHOW;
-
+/*	si.dwFlags = STARTF_USESHOWWINDOW;
+	si.wShowWindow = SW_SHOW;
+*/
 	n = GetSystemDirectory(app, sizeof(app)-sizeof(cmdexe));
 	if(n > sizeof(app))
 		return -1;
-	strcat_s(app, sizeof(app), cmdexe);
+	strncat(app, cmdexe, sizeof(app));
 	n = strlen(s)+20;
 	cmd = malloc(n);
 	if(cmd == NULL)
 		return -1;
-	strcpy_s(cmd, n, "cmd.exe /c");
-	strcat_s(cmd, n, s);
+	strncpy(cmd, "cmd.exe /c", n);
+	strncat(cmd, s, n);
 	if(!CreateProcess(app, cmd, NULL, NULL, TRUE, CREATE_DEFAULT_ERROR_MODE, NULL/* env*/, NULL /*wdir*/, &si, &pinfo)){
 		fprintf(stderr, "can't create process %s %d\n", s, GetLastError());
 		free(cmd);
@@ -49,6 +51,6 @@ int system(char *s) {
 		return -1;
 	if(!GetExitCodeProcess(pinfo.hProcess, &status))
 		status = 1;
-	//fprintf(stderr, "status %d\n", status);
+	/* fprintf(stderr, "status %d\n", status); */
 	return status;
 }

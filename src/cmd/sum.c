@@ -35,7 +35,7 @@ main(int argc, char **argv)
 				exitstr = s;
 	}else
 		exitstr = sumfile(0, fn);
-	exits(exitstr);
+	return (exitstr?1:0);
 }
 
 char*

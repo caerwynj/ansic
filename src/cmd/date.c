@@ -22,9 +22,9 @@ main(int argc, char *argv[])
 	if(nflg)
 		print("%ld\n", now);
 	else if(uflg)
-		print("%s", asctime(gmtime(now)));
+		print("%s", asctime(gmtime(&now)));
 	else
-		print("%s", ctime(now));
+		print("%s", ctime(&now));
 	
-	exits(0);
+	return 0;
 }

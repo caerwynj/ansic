@@ -26,7 +26,7 @@ main(int argc, char *argv[])
 	ARGBEGIN{
 	default:
 		fprint(2, "freq: unknown option %c\n", ARGC());
-		exits("usage");
+		return 1;
 	case 'd':
 		flag |= Fdec;
 		break;
@@ -47,7 +47,7 @@ main(int argc, char *argv[])
 		flag |= Fdec | Fhex | Foct | Fchar;
 	if(argc < 1) {
 		freq(0, "-");
-		exits(0);
+		return 0;
 	}
 	for(i=0; i<argc; i++) {
 		f = open(argv[i], 0);
