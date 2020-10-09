@@ -394,7 +394,8 @@ main(int argc, char *argv[])
 	summary();
 	callopt();
 	others();
-	exits(0);
+	exit(0);
+	return 0;
 }
 
 /*
@@ -632,7 +633,7 @@ error(char *s, ...)
 		return;
 	summary();
 	cleantmp();
-	exits("error");
+	exit(1);
 }
 
 /*
@@ -712,7 +713,7 @@ cpres(void)
 	if(nerrors) {
 		summary();
 		cleantmp();
-		exits("error");
+		exit(1);
 	}
 	if(pmem != &pyield[nprod])
 		error("internal Yacc error: pyield %d", pmem-&pyield[nprod]);
@@ -910,7 +911,7 @@ more:
 	if(nerrors) {
 		summary();
 		cleantmp();
-		exits("error");
+		exit(1);
 	}
 
 	/* now, compute the pempty array, to see which nonterminals derive the empty string */
@@ -1169,7 +1170,7 @@ void
 intr(void)
 {
 	cleantmp();
-	exits("interrupted");
+	exit(1);
 }
 
 void

@@ -1,7 +1,7 @@
-#include	"lib9.h"
-#include	<bio.h>
+#include "lib9.h"
+#include <bio.h>
 
-static int
+static int 
 fmtBflush(Fmt *f)
 {
 	Biobuf *bp;
@@ -29,15 +29,10 @@ Bvprint(Biobuf *bp, char *fmt, va_list arg)
 	f.flush = fmtBflush;
 	f.farg = bp;
 	f.nfmt = 0;
-#ifdef va_copy
-	va_copy(f.args, arg);
-#else
-	f.args = arg;
-#endif
-	n = dofmt(&f, fmt);
-#ifdef va_copy
-	va_end(f.args);
-#endif
+	fmtlocaleinit(&f, nil, nil, nil);
+	n = fmtvprint(&f, fmt, arg);
 	bp->ocount = (char*)f.to - (char*)f.stop;
+	if(n == 0)
+		n = f.nfmt;
 	return n;
 }

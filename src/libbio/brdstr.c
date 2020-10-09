@@ -91,7 +91,7 @@ Brdstr(Biobuf *bp, int delim, int nulldelim)
 				ip = (char*)bp->ebuf - i;
 				if(i < bp->bsize){
 					memmove(ip, bp->bbuf, i);
-					bp->gbuf = (uchar*)ip;
+					bp->gbuf = (unsigned char*)ip;
 				}
 				j = (ep - (char*)bp->bbuf) + 1;
 				bp->icount = j - i;

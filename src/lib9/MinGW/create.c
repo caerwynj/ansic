@@ -1,108 +1,32 @@
-#include <u.h>
-#include <mingw32.h>
-#include <mingwutil.h>
-#define NOPLAN9DEFINES
-#include <libc.h>
-
-#include "util.h"
-#include "fdtab.h"
+#include "lib9.h"
+#include <sys/types.h>
+#include <fcntl.h>
 
 int
-p9create(char *name, int mode, ulong perm)
+create(char *f, int mode, int perm)
 {
-	int	fd, rdwr;
-	int	trytrunc;
-	DWORD	da, share, flags, cmode;
-	HANDLE	h;
-	char *path;
-	Fd	*f;
+	int m;
 
-	rdwr = mode&3;
-	da = 0;
-	trytrunc = 0;
-	h = INVALID_HANDLE_VALUE;
-	switch (rdwr) {
+	m = 0;
+	switch(mode & 3){
 	case OREAD:
-		da |= GENERIC_READ;
+	case OEXEC:
+		m = O_RDONLY;
+		break;
+	case OWRITE:
+		m = O_WRONLY;
 		break;
 	case ORDWR:
-		da |= GENERIC_READ;
-	case OWRITE:
- 		da |= GENERIC_WRITE;
-		trytrunc = 1;
+		m = O_RDWR;
+		break;
 	}
-	mode &= ~(OCEXEC|OLOCK);
-	share = FILE_SHARE_DELETE | FILE_SHARE_READ | FILE_SHARE_WRITE;
-	flags = 0;
+	m |= O_CREAT|O_TRUNC;
 
-	name = winadjustcons(name, rdwr, &da);
-	if (name==nil)
-		return -1;
-	path = winpathdup(name);
-	if (path==nil)
-		return -1;
-	fd = fdtalloc(nil);
-	f = fdtab[fd];
-	f->name = path;
-	
-	if (!strcmp("/dev/null", name)) {
-		f->type = Fdtypedevnull;
-		return fd;
+	if(perm & DMDIR){
+		if(mkdir(f) < 0)   /* mkdir(f, perm&0777) */
+			return -1;
+		perm &= ~DMDIR;
+		m &= 3;
 	}
-
-	/* XXX should get mode mask right? */
-	if(perm&DMDIR){
-		if(mode != OREAD){
-			werrstr("bad mode in directory create");
-			goto fail;
-		}
-		if(!wincreatedir(path))
-			goto fail;
-	}else{
-		mode &= ~(3|OTRUNC);
-		if(mode&OEXCL){
-			share = 0;
-			mode &= ~OEXCL;
-		}
-		if(mode&OAPPEND){
-			da = FILE_APPEND_DATA;
-			mode ^= OAPPEND;
-		}
-		if(mode&ODIRECT){
-			flags |= FILE_FLAG_WRITE_THROUGH;
-			mode ^= ODIRECT;
-		}
-		if(mode&ORCLOSE){
-			flags |= FILE_FLAG_DELETE_ON_CLOSE;
-			mode ^= ORCLOSE;
-		}
-		if(mode){
-			werrstr("unsupported mode in create");
-			goto fail;
-		}
-		if (flags==0)
-			flags = FILE_ATTRIBUTE_NORMAL;
-		if (trytrunc)
-			h = wincreatefile(path, da, share, TRUNCATE_EXISTING, flags);
-		if (h==INVALID_HANDLE_VALUE) {
-			h = wincreatefile(path, da, share, CREATE_NEW, flags);
-			if (h==INVALID_HANDLE_VALUE) {
-				winerror("CreateFile");
-			fail:
-				if (fdtdebug>1)
-					fprint(2, "create %s failed: %r\n", path);
-				fdtclose(fd, 1);
-				return -1;
-			}
-		}
-	}
-
-	if (GetConsoleMode(h, &cmode))
-		f->type = Fdtypecons;
-	else
-		f->type = Fdtypefile;
-	f->h = h;
-	if (fdtdebug>1)
-		fprint(2, "%\f h:%p\n", fd, f, "create", h);
-	return fd;
+	return open(f, m, perm);
 }

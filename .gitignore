@@ -12,3 +12,4 @@ o.*
 src/cmd/mk/ut
 src/lib9/archive
 test
+src/lib9/MinGW/archive

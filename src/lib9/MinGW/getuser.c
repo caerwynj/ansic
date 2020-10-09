@@ -1,17 +1,8 @@
-#include <u.h>
-#include <mingw32.h>
-#include <libc.h>
+#include "lib9.h"
 
 char*
 getuser(void)
 {
-	static char user[64];
-
-	DWORD	ulen;
-
-	ulen = sizeof user;
-	if (GetUserName(user, &ulen))
-		return user;
-
-	return "none";
+	/* could do better, but result isn't really used */
+	return "unknown";
 }

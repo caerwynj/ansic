@@ -5,7 +5,7 @@ long
 Bread(Biobuf *bp, void *ap, long count)
 {
 	long c;
-	uchar *p;
+	unsigned char *p;
 	int i, n, ic;
 
 	p = ap;
@@ -41,7 +41,5 @@ Bread(Biobuf *bp, void *ap, long count)
 		p += n;
 	}
 	bp->icount = ic;
-	if(count == c && bp->state == Binactive)
-		return -1;
 	return count-c;
 }

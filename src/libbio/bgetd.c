@@ -27,7 +27,7 @@ Bgetd(Biobuf *bp, double *dp)
 
 	b.b = bp;
 	b.eof = 0;
-	d = charstod(Bgetdf, &b);
+	d = fmtcharstod(Bgetdf, &b);
 	if(b.eof)
 		return -1;
 	Bungetc(bp);

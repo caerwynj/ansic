@@ -14,6 +14,10 @@
 #define	offsetof(s, m)	(ulong)(&(((s*)0)->m))
 #endif
 
+
+extern	vlong	strtoll(const char*, char**, int);
+extern	uvlong	strtoull(const char*, char**, int);
+
 /*
  * most mem and string routines are declared by ANSI/POSIX files above
  */
@@ -69,9 +73,10 @@ extern	char*	cleanname(char*);
 extern	uintptr	getcallerpc(void*);
 extern	int	getfields(char*, char**, int, int, char*);
 
+extern	char*	getwd(char*, int);
+
 /*
 extern	char*	getuser(void);
-extern	char*	getwd(char*, int);
 extern	char*	getwd(char*, int);
 extern	double	ipow10(int);
 */
@@ -191,7 +196,7 @@ extern	void	_exits(char*);
 extern	void	exits(char*);
 */
 
-extern	int	create(char*, int, int);
+extern	int	p9create(char*, int, int);
 extern	int	errstr(char*, uint);
 
 extern	long	readn(int, void*, long);
@@ -199,6 +204,8 @@ extern	void	rerrstr(char*, uint);
 extern	vlong	seek(int, vlong, int);
 extern	int	segflush(void*, ulong);
 extern	void	werrstr(char*, ...);
+
+#define create	p9create
 
 extern char *argv0;
 #define	ARGBEGIN	for((argv0||(argv0=*argv)),argv++,argc--;\

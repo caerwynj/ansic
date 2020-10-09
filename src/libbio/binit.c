@@ -16,7 +16,7 @@ batexit(void)
 	Biobuf *bp;
 	int i;
 
-	for(i=0; i<nelem(wbufs); i++) {
+	for(i=0; i<MAXBUFS; i++) {
 		bp = wbufs[i];
 		if(bp != 0) {
 			wbufs[i] = 0;
@@ -31,7 +31,7 @@ deinstall(Biobuf *bp)
 {
 	int i;
 
-	for(i=0; i<nelem(wbufs); i++)
+	for(i=0; i<MAXBUFS; i++)
 		if(wbufs[i] == bp)
 			wbufs[i] = 0;
 }
@@ -43,7 +43,7 @@ install(Biobuf *bp)
 	int i;
 
 	deinstall(bp);
-	for(i=0; i<nelem(wbufs); i++)
+	for(i=0; i<MAXBUFS; i++)
 		if(wbufs[i] == 0) {
 			wbufs[i] = bp;
 			break;
@@ -55,7 +55,7 @@ install(Biobuf *bp)
 }
 
 int
-Binits(Biobuf *bp, int f, int mode, uchar *p, int size)
+Binits(Biobuf *bp, int f, int mode, unsigned char *p, int size)
 {
 
 	p += Bungetsize;	/* make room for Bungets */
@@ -98,6 +98,19 @@ Binit(Biobuf *bp, int f, int mode)
 }
 
 Biobuf*
+Bfdopen(int f, int mode)
+{
+	Biobuf *bp;
+
+	bp = malloc(sizeof(Biobuf));
+	if(bp == 0)
+		return 0;
+	Binits(bp, f, mode, bp->b, sizeof(bp->b));
+	bp->flag = Bmagic;
+	return bp;
+}
+
+Biobuf*
 Bopen(char *name, int mode)
 {
 	Biobuf *bp;
@@ -109,36 +122,32 @@ Bopen(char *name, int mode)
 		return 0;
 
 	case OREAD:
-		f = open(name, OREAD);
+		f = open(name, mode);
+		if(f < 0)
+			return 0;
 		break;
 
 	case OWRITE:
 		f = create(name, mode, 0666);
-		break;
+		if(f < 0)
+			return 0;
 	}
-	if(f < 0)
-		return 0;
-	bp = malloc(sizeof(Biobuf));
-	if(bp == nil)
-		return 0;
-	Binits(bp, f, mode, bp->b, sizeof(bp->b));
-	bp->flag = Bmagic;
+	bp = Bfdopen(f, mode);
+	if(bp == 0)
+		close(f);
 	return bp;
 }
 
 int
 Bterm(Biobuf *bp)
 {
-	int r;
 
 	deinstall(bp);
-	r = Bflush(bp);
+	Bflush(bp);
 	if(bp->flag == Bmagic) {
 		bp->flag = 0;
 		close(bp->fid);
-		bp->fid = -1;			/* prevent accidents */
 		free(bp);
 	}
-	/* otherwise opened with Binit(s) */
-	return r;
+	return 0;
 }

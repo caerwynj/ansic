@@ -1,41 +1,24 @@
-#include <u.h>
-#include <mingw32.h>
-#include <libc.h>
+#include "lib9.h"
+#include <windows.h>
 
-#include "util.h"
-
-
-enum {
-	NBUF	= _MAX_PATH,
-	BUFSZ	= sizeof(WCHAR)*NBUF,
-};
-
-#undef getwd
 
 char*
-p9getwd(char *s, int ns)
+getwd(char *buf, int size)
 {
-	WCHAR wbuf[NBUF];
-	char *ep;
-	long	sz;
+	int n;
+	char *p;
 
-	if (_wgetcwd(wbuf, nelem(wbuf)) == NULL)
-		return nil;
+	buf[0] = 0;
 
-	winreplacews(wbuf, 0);
-
-	ep = s+ns;
-	if(s<ep){
-		*s = '/';
-		winwstrtoutfe(s+1, ep, wbuf);
+	n = GetCurrentDirectory(size, buf);
+	if(n == 0) {
+		/*winerror();*/
+		return 0;
 	}
-	if (winisdrvspec(s+1))
-		s[2] = '-';
-	else
-		winwstrtoutfe(s, ep, wbuf);
-	winbsl2sl(s);
-	sz = strlen(s);
-	if (s[sz-1]=='/')
-		s[sz-1] = '\0';
-  	return s;
+
+	for(p=buf; *p; p++)
+		if(*p == '\\')
+			*p = '/';
+
+	return buf;
 }

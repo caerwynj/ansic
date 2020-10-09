@@ -67,6 +67,7 @@ UTFOFILES=\
 
 <$SYSTARG/ofiles.mk
 LIB9OFILES=\
+	$SYSOFILES\
 #	_exits.$O\
 #	_p9dialparse.$O\
 #	_p9dir.$O\
@@ -86,7 +87,7 @@ LIB9OFILES=\
 	convM2D.$O\
 	convM2S.$O\
 	convS2M.$O\
-#	create.$O\
+	create.$O\
 #	crypt.$O\
 #	ctime.$O\
 #	dial.$O\
@@ -98,6 +99,7 @@ LIB9OFILES=\
 #	dirwstat.$O\
 #	dup.$O\
 #	encodefmt.$O\
+	errfmt.$O\
 	errstr.$O\
 #	exec.$O\
 #	execl.$O\
@@ -110,7 +112,7 @@ LIB9OFILES=\
 #	getnetconn.$O\
 #	getns.$O\
 #	getuser.$O\
-#	getwd.$O\
+	getwd.$O\
 #	jmp.$O\
 #	lrand.$O\
 #	lnrand.$O\
@@ -145,6 +147,8 @@ LIB9OFILES=\
 #	sleep.$O\
 	strdup.$O\
 	strecpy.$O\
+	strtoll.$O\
+	strtoull.$O\
 	sysfatal.$O\
 #	syslog.$O\
 #	sysname.$O\
@@ -170,6 +174,9 @@ HFILES=\
 	$PLAN9/include/lib9.h\
 
 <$ROOT/src/mkfiles/mksyslib-$SHELLTYPE
+
+%.$O: $SYSTARG/%.c
+	$CC $CFLAGS -I$SYSTARG $SYSTARG/$stem.c
 
 %.$O: fmt/%.c
 	$CC $CFLAGS -Ifmt fmt/$stem.c
