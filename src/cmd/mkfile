@@ -1,5 +1,6 @@
 <../mkconfig
 
+
 TARG=\
 	ascii \
 	basename \
@@ -60,6 +61,9 @@ TARG=\
 #	yacc \
 #	zerotrunc \
 		
+
+SHORTLIB=bio regexp 9
+LDFLAGS=-lm
 
 <$ROOT/src/mkfiles/mkmany
 

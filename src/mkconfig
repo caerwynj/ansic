@@ -1,7 +1,7 @@
-ROOT=d:/github/ansic
-SYSHOST=MinGW
+ROOT=/home/ansic
+SYSHOST=Linux
 SYSTARG=$SYSHOST
-OBJTYPE=386
+OBJTYPE=arm64
 OBJDIR=$SYSTARG/$OBJTYPE
 
 <$ROOT/src/mkfiles/mkhost-$SYSHOST

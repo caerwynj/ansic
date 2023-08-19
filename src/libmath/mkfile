@@ -7,7 +7,7 @@ OFILES=\
 	blas.$O\
 	dtoa.$O\
 	fdim.$O\
-	FPcontrol-$TARGTYPE.$O\
+#	FPcontrol-$TARGTYPE.$O\
 	gemm.$O\
 	g_fmt.$O\
 	gfltconv.$O\
@@ -48,7 +48,7 @@ OFILES=\
 	s_finite.$O\
 	s_floor.$O\
 	s_ilogb.$O\
-	s_isnan.$O\
+#	s_isnan.$O\
 	s_log1p.$O\
 	s_nextafter.$O\
 	s_rint.$O\
@@ -58,10 +58,10 @@ OFILES=\
 	s_tanh.$O\
 
 HFILES=\
-	../include/mathi.h\
+	../../include/mathi.h\
 	fdlibm/fdlibm.h\
 	
-<../mksyslib
+<../mkfiles/mksyslib-$SHELLTYPE
 
 %.$O:	fdlibm/%.c
 	$CC $CFLAGS -Ifdlibm fdlibm/$stem.c

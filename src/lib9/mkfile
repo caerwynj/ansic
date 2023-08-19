@@ -100,7 +100,7 @@ LIB9OFILES=\
 #	dup.$O\
 #	encodefmt.$O\
 	errfmt.$O\
-	errstr.$O\
+#	errstr.$O\
 #	exec.$O\
 #	execl.$O\
 #	exitcode.$O\
@@ -112,7 +112,7 @@ LIB9OFILES=\
 #	getnetconn.$O\
 #	getns.$O\
 #	getuser.$O\
-	getwd.$O\
+#	getwd.$O\
 #	jmp.$O\
 #	lrand.$O\
 #	lnrand.$O\

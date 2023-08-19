@@ -7,6 +7,7 @@
 #include <regexp.h>
 
 #undef EOF	/* stdio? */
+#define getline ed_getline
 
 enum
 {

@@ -1,4 +1,4 @@
-<$PLAN9/src/mkhdr
+<../../mkconfig
 
 # Calling this grep breaks a LOT.  Like egrep on Linux.
 # And probably configure.
@@ -13,6 +13,8 @@ OFILES=\
 	comp.$O\
 	sub.$O\
 
-YFILES=grep.y\
+YFILES=grep.y
 
-<$PLAN9/src/mkone
+LIBS=9
+
+<../../mkfiles/mkone-$SHELLTYPE
